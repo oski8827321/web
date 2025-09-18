@@ -753,7 +753,32 @@ body::after {
     font-style: italic;
 }
 
-/* Footer */
+/* Timeline completed and active states */
+.timeline-item.completed .timeline-marker {
+    background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+}
+
+.timeline-item.active .timeline-marker {
+    background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
+    box-shadow: 0 0 30px rgba(74, 158, 255, 0.8);
+    animation: pulse 2s infinite;
+}
+
+.timeline-item.completed .timeline-content {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.timeline-item.active .timeline-content {
+    border-color: var(--accent-blue);
+    background: rgba(74, 158, 255, 0.1);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
 .main-footer {
     background: var(--bg-secondary);
     border-top: 1px solid rgba(255, 255, 255, 0.1);

@@ -1,17 +1,12 @@
 // Interstellar Website - Main JavaScript Application
 class InterstellarApp {
     constructor() {
-        this.scene = null;
-        this.camera = null;
-        this.renderer = null;
         this.planets = [];
         this.selectedPlanet = null;
-        this.clock = new THREE.Clock();
-        this.mouse = new THREE.Vector2();
-        this.raycaster = new THREE.Raycaster();
         this.isLoading = true;
         this.timeScale = 1;
         this.missionStartTime = Date.now();
+        this.animationId = null;
         
         // Planet data
         this.planetData = {

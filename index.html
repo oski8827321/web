@@ -7,15 +7,23 @@
     <meta name="description" content="Experience the cosmos through interactive 3D planets, time dilation effects, and educational content inspired by Interstellar">
     <link rel="icon" href="favicon.png" type="image/x-icon">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" as="script">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" as="script">
-    
-    <!-- External libraries -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Fonts fallback -->
+    <style>
+        @font-face {
+            font-family: 'Orbitron';
+            src: local('Orbitron'), local('monospace');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: local('Inter'), local('Arial'), local('sans-serif');
+            font-weight: 300 600;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
     
     <!-- Custom styles -->
     <link rel="stylesheet" href="styles.css">
@@ -320,7 +328,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script src="simple-script.js"></script>
     <script>
         // Initialize the application when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
