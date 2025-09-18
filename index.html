@@ -1,34 +1,331 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>muj web</title>
+    <title>Interstellar Journey | Time & Space Exploration</title>
+    <meta name="description" content="Experience the cosmos through interactive 3D planets, time dilation effects, and educational content inspired by Interstellar">
     <link rel="icon" href="favicon.png" type="image/x-icon">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" as="script">
+    
+    <!-- External libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Vítej na mojem webu /ᐠ •⩊•マ</h1>
-        <nav>
-            <ul>
-                <li><a href="projects.html">Projekty</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="homelab.html">Home lab</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="about">
-            <h2>O webu</h2>
-            <p>Tohle je web který slouží převážně pro mně jako na ukládnaní projektu a podobných věcí.</p>
-            <p>Jedná se o neseriozní web tím padem tady můžou být úplně random věci &lt3 .</p>
-            <h2>Mrkni sem ---> <a href="blog.html">blog</a> </h2>
-        </section>
-    </main>
-    <footer>
-        <hr>
-        <p>&copy; 2025 made with &lt3. .</p>
-        <p>Poslední aktualizace: září 2025</p>
+    <!-- Loading screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Initializing Journey</h2>
+            <p class="loading-text">Calibrating temporal coordinates...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main navigation -->
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <h1>INTERSTELLAR</h1>
+            <span class="nav-subtitle">Time & Space Exploration</span>
+        </div>
+        <div class="nav-links">
+            <a href="#mission" class="nav-link">Mission</a>
+            <a href="#planets" class="nav-link">Planets</a>
+            <a href="#physics" class="nav-link">Physics</a>
+            <a href="#journey" class="nav-link">Journey</a>
+        </div>
+        <div class="nav-controls">
+            <button id="audio-toggle" class="control-btn" title="Toggle ambient audio">
+                <span class="audio-icon">🔊</span>
+            </button>
+            <button id="info-toggle" class="control-btn" title="Toggle information panels">
+                <span class="info-icon">ℹ</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-line">BEYOND THE</span>
+                <span class="title-line highlight">EVENT HORIZON</span>
+            </h1>
+            <p class="hero-subtitle">
+                Explore the cosmos where time flows differently and gravity bends reality.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="earth-time">12:00:00</span>
+                    <span class="stat-label">Earth Time</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="mission-time">0 Days</span>
+                    <span class="stat-label">Mission Duration</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="distance">0 AU</span>
+                    <span class="stat-label">Distance Traveled</span>
+                </div>
+            </div>
+            <button class="cta-button" id="start-journey">
+                <span>Begin Journey</span>
+                <div class="button-glow"></div>
+            </button>
+        </div>
+        <div class="hero-visual">
+            <canvas id="hero-canvas"></canvas>
+        </div>
+    </section>
+
+    <!-- Planet selection section -->
+    <section id="planets" class="planets-section">
+        <div class="section-header">
+            <h2 class="section-title">Choose Your Destination</h2>
+            <p class="section-subtitle">Each world offers unique temporal experiences and scientific discoveries</p>
+        </div>
+        
+        <div class="planets-container">
+            <canvas id="planets-canvas"></canvas>
+            
+            <!-- Planet information panels -->
+            <div class="planet-info-panel" id="miller-info">
+                <div class="info-header">
+                    <h3>Miller's Planet</h3>
+                    <span class="planet-type">Water World</span>
+                </div>
+                <div class="info-content">
+                    <div class="time-dilation">
+                        <span class="dilation-ratio">1 hour = 7 years</span>
+                        <p>Extreme time dilation due to proximity to Gargantua</p>
+                    </div>
+                    <div class="planet-stats">
+                        <div class="stat">
+                            <span class="label">Gravity:</span>
+                            <span class="value">1.3g</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Surface:</span>
+                            <span class="value">Ocean</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Hazards:</span>
+                            <span class="value">Tidal waves</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Distance:</span>
+                            <span class="value">Close orbit</span>
+                        </div>
+                    </div>
+                    <button class="visit-button" data-planet="miller">Visit Planet</button>
+                </div>
+            </div>
+
+            <div class="planet-info-panel" id="mann-info">
+                <div class="info-header">
+                    <h3>Mann's Planet</h3>
+                    <span class="planet-type">Ice World</span>
+                </div>
+                <div class="info-content">
+                    <div class="time-dilation">
+                        <span class="dilation-ratio">Earth-like time</span>
+                        <p>Minimal time dilation - safer temporal conditions</p>
+                    </div>
+                    <div class="planet-stats">
+                        <div class="stat">
+                            <span class="label">Gravity:</span>
+                            <span class="value">0.8g</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Surface:</span>
+                            <span class="value">Frozen clouds</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Hazards:</span>
+                            <span class="value">Extreme cold</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Distance:</span>
+                            <span class="value">Outer orbit</span>
+                        </div>
+                    </div>
+                    <button class="visit-button" data-planet="mann">Visit Planet</button>
+                </div>
+            </div>
+
+            <div class="planet-info-panel" id="edmunds-info">
+                <div class="info-header">
+                    <h3>Edmunds' Planet</h3>
+                    <span class="planet-type">Habitable World</span>
+                </div>
+                <div class="info-content">
+                    <div class="time-dilation">
+                        <span class="dilation-ratio">Slight dilation</span>
+                        <p>Moderate time effects - balanced for colonization</p>
+                    </div>
+                    <div class="planet-stats">
+                        <div class="stat">
+                            <span class="label">Gravity:</span>
+                            <span class="value">1.0g</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Surface:</span>
+                            <span class="value">Rocky terrain</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Hazards:</span>
+                            <span class="value">Dust storms</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Distance:</span>
+                            <span class="value">Goldilocks zone</span>
+                        </div>
+                    </div>
+                    <button class="visit-button" data-planet="edmunds">Visit Planet</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Time comparison display -->
+        <div class="time-display">
+            <h3>Temporal Synchronization</h3>
+            <div class="time-clocks">
+                <div class="clock earth-clock">
+                    <div class="clock-face">
+                        <div class="clock-hand hour-hand"></div>
+                        <div class="clock-hand minute-hand"></div>
+                        <div class="clock-hand second-hand"></div>
+                    </div>
+                    <span class="clock-label">Earth</span>
+                    <span class="clock-time">12:00:00</span>
+                </div>
+                <div class="clock planet-clock">
+                    <div class="clock-face">
+                        <div class="clock-hand hour-hand"></div>
+                        <div class="clock-hand minute-hand"></div>
+                        <div class="clock-hand second-hand"></div>
+                    </div>
+                    <span class="clock-label">Selected Planet</span>
+                    <span class="clock-time">12:00:00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Physics education section -->
+    <section id="physics" class="physics-section">
+        <div class="section-header">
+            <h2 class="section-title">The Science Behind</h2>
+            <p class="section-subtitle">Understanding relativity, gravity, and time dilation</p>
+        </div>
+        
+        <div class="physics-content">
+            <div class="physics-card">
+                <div class="card-icon">⏰</div>
+                <h3>Time Dilation</h3>
+                <p>Time passes differently in strong gravitational fields. The closer you are to a massive object like a black hole, the slower time moves relative to an outside observer.</p>
+                <div class="formula">
+                    <span>Δt' = Δt√(1 - 2GM/rc²)</span>
+                </div>
+            </div>
+            
+            <div class="physics-card">
+                <h3>Gravitational Effects</h3>
+                <div class="card-icon">🌍</div>
+                <p>Massive objects warp spacetime, creating what we experience as gravity. This warping affects both space and time dimensions.</p>
+                <div class="visual-aid">
+                    <canvas id="spacetime-canvas" width="200" height="200"></canvas>
+                </div>
+            </div>
+            
+            <div class="physics-card">
+                <div class="card-icon">🚀</div>
+                <h3>Orbital Mechanics</h3>
+                <p>Planets orbit in elliptical paths, influenced by gravitational forces and relativistic effects near extreme masses.</p>
+                <div class="orbit-display">
+                    <div class="orbit-animation"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey timeline -->
+    <section id="journey" class="journey-section">
+        <div class="section-header">
+            <h2 class="section-title">Mission Timeline</h2>
+            <p class="section-subtitle">Track your progress through the cosmos</p>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item" data-step="1">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                    <h4>Earth Departure</h4>
+                    <p>Launch from dying Earth in search of humanity's new home</p>
+                    <span class="timeline-time">T+0 hours</span>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-step="2">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                    <h4>Wormhole Transit</h4>
+                    <p>Navigate through the mysterious wormhole near Saturn</p>
+                    <span class="timeline-time">T+2 years</span>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-step="3">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                    <h4>Gargantua System</h4>
+                    <p>Enter the system dominated by the supermassive black hole</p>
+                    <span class="timeline-time">T+2.5 years</span>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-step="4">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                    <h4>Planet Selection</h4>
+                    <p>Choose your destination among the candidate worlds</p>
+                    <span class="timeline-time">Current</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Interstellar Journey Experience</p>
+            <p>Inspired by the science of relativity and the mystery of space</p>
+            <div class="footer-links">
+                <a href="#physics">Physics</a>
+                <a href="#planets">Planets</a>
+                <a href="#journey">Journey</a>
+            </div>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            InterstellarApp.init();
+        });
+    </script>
 </body>
 </html>
