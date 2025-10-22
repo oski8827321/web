@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="terminal-window" id="main-terminal">
+        <header class="terminal-header">
+            <div class="header-buttons">
+                <span class="button red"></span>
+                <span class="button yellow"></span>
+                <span class="button green"></span>
+            </div>
+            <div class="header-title">user@oskihoweb.com</div>
+        </header>
+        
+        <main id="terminal-content">
+            <div id="history">
+            </div>
+            <div class="prompt-line" id="prompt-container" style="display: none;">
+                <label for="command-input" class="prompt">user@host:~$</label>
+                <input type="text" id="command-input" autocomplete="off">
+            </div>
+        </main>
+    </div>
+
+    <template id="window-template">
+        <div class="floating-window">
+            <header class="window-header">
+                <span class="window-title"></span>
+                <button class="window-close-btn">×</button>
+            </header>
+            <div class="window-body"></div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
