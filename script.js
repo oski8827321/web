@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case '.onion':
                 printToHistory("Onion Service Address:", true);
                 printToHistory("<span class='output-success'>http://oskiweb4x6s7p3q2r9t8....onion</span>", true);
-                printToHistory("<span class='log-warn'>(This is a fictional address for demonstration)</span>", true);
+                printToHistory("<span class='log-warn'>(offline)</span>", true);
                 break;
         
 
